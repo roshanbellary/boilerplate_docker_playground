@@ -1,0 +1,20 @@
+name: Docker Tests
+
+on: push
+
+jobs:
+  docker-compose:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Docker Compose
+      run: docker-compose -f docker-compose.yml up -d
+
+    - name: Wait for the application to start
+      run: sleep 1500 # Need to adjust for how long it takes to set up
+
+    - name: Run tests
+      run: |
+        docker exec nodebackend yarn test
