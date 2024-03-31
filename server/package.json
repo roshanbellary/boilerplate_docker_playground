@@ -4,8 +4,8 @@
   "exports": "./index.js",
   "license": "MIT",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --runInBand --verbose --detectOpenHandles --forceExit",
-    "server": "cross-env NODE_ENV=development ts-node-dev --respawn index.ts",
+    "test": "NODE_ENV=test jest --runInBand --verbose --detectOpenHandles --forceExit",
+    "server": "NODE_ENV=development ts-node-dev --respawn index.ts",
     "start": "yarn server",
     "build": "tsc --build",
     "clean": "rm -rf node_modules",
@@ -19,6 +19,7 @@
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.17.2",
     "express-flash": "^0.0.2",
