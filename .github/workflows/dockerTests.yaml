@@ -1,24 +1,43 @@
 name: Docker Tests
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  docker-compose:
+  build-and-run:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Docker Compose
-      run: docker-compose -f docker-compose.yml up -d
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Wait for the application to start
-      run: |
-        until [ "$(docker-compose ps -q reactfrontend)"]; do
-          echo "Setting up docker container"
-          sleep 10
-        done
+      # Build React frontend
+      - name: Build React frontend
+        working-directory: ./client
+        run: |
+          yarn install
+          yarn build
+      
+      # Build Node backend
+      - name: Build Node backend
+        working-directory: ./server
+        run: |
+          yarn install
+          # Assuming you have a build script for your backend
+          yarn build
 
-    - name: Run tests
-      run: |
-        docker exec reactfrontend yarn test
+      # Run services
+      - name: Run React frontend
+        working-directory: ./client
+        run: yarn start &
+      
+      - name: Run Node backend
+        working-directory: ./server
+        run: yarn start &
