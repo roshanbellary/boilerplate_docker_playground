@@ -5,6 +5,7 @@ LABEL org.opencontainers.image.licenses=MIT
 WORKDIR /app
 COPY package.json yarn.lock* ./
 RUN yarn install
+RUN yarn start
 COPY . .
 EXPOSE 4000
 CMD ["yarn", "server"]
