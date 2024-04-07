@@ -18,26 +18,14 @@ jobs:
         with:
           node-version: '14'
 
-      # Build React frontend
-      - name: Build React frontend
+      - name: Build and run React frontend
         working-directory: ./client
         run: |
-          yarn install
-          yarn build
+          docker build -t reactfrontend .
+          docker run --name reactfrontend-container -d -p 3000:3000 reactfrontend
       
-      # Build Node backend
-      - name: Build Node backend
+      - name: Build and run Node backend
         working-directory: ./server
         run: |
-          yarn install
-          # Assuming you have a build script for your backend
-          yarn build
-
-      # Run services
-      - name: Run React frontend
-        working-directory: ./client
-        run: yarn start &
-      
-      - name: Run Node backend
-        working-directory: ./server
-        run: yarn start &
+          docker build -t nodebackend .
+          docker run --name nodebackend-container -d -p 4000:4000 --env-file .env nodebackend
