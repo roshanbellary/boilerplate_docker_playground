@@ -22,10 +22,10 @@ jobs:
         working-directory: ./client
         run: |
           docker build -t reactfrontend .
-          docker run --name reactfrontend-container -d -p 3000:3000 reactfrontend
+          docker run --name reactfrontend-container -d -p 3000:3000 reactfrontend yarn test
       
       - name: Build and run Node backend
         working-directory: ./server
         run: |
           docker build -t nodebackend .
-          docker run --name nodebackend-container -d -p 4000:4000 --env-file .env nodebackend
+          docker run --name nodebackend-container -d -p 4000:4000 --env-file .env nodebackend yarn test
