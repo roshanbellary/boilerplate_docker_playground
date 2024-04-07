@@ -14,7 +14,7 @@ jobs:
 
     - name: Wait for the application to start
       run: |
-        until [ "$(docker-compose ps -q nodebackend) ]; do
+        until [ "$(docker-compose ps -q nodebackend)" ]; do
           echo "Setting up docker container"
           sleep 10
         done
