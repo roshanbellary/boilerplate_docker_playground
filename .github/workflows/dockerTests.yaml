@@ -12,7 +12,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+      - name: Use MongoDB Atlas URI
+        env:
+          ATLAS_URI: ${{ secrets.ATLAS_URI }}
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
