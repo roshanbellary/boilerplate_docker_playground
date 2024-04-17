@@ -3,16 +3,16 @@
  * relating to admin users.
  */
 import express from 'express';
-import { isAdmin } from '../controllers/admin.middleware.ts';
+import { isAdmin } from '../controllers/admin.middleware';
 import {
   getAllUsers,
   upgradePrivilege,
   deleteUser,
   inviteUser,
   verifyToken,
-} from '../controllers/admin.controller.ts';
-import { isAuthenticated } from '../controllers/auth.middleware.ts';
-import { approve } from '../controllers/auth.controller.ts';
+} from '../controllers/admin.controller';
+import { isAuthenticated } from '../controllers/auth.middleware';
+import { approve } from '../controllers/auth.controller';
 import 'dotenv/config';
 
 const router = express.Router();

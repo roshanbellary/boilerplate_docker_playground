@@ -1,24 +1,30 @@
-name: Docker Tests
+name: Docker Build and Run React App
 
-on: push
+on:
+  push:
+    branches:
+      - main  # Adjust to your main branch name
 
 jobs:
-  docker-compose:
+  build-and-run:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Docker Compose
-      run: docker-compose -f docker-compose.yml up -d
-
-    - name: Wait for the application to start
-      run: |
-        until [ "$(docker-compose ps -q nodebackend ]; do
-          echo "Setting up docker container"
-          sleep 10
-        done
-
-    - name: Run tests
-      run: |
-        docker exec nodebackend yarn test
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build React app
+        run: npm run build
+      
+      - name: Build Docker image
+        run: docker build -t my-react-app .
+      
+      - name: Run Docker container
+        run: docker run --name my-react-container -p 8080:80 -d my-react-app

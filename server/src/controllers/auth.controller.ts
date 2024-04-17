@@ -6,25 +6,25 @@ import express from 'express';
 import passport from 'passport';
 import crypto from 'crypto';
 import { hash } from 'bcrypt';
-import { IUser } from '../models/user.model.ts';
-import StatusCode from '../util/statusCode.ts';
+import { IUser } from '../models/user.model';
+import StatusCode from '../util/statusCode';
 import {
   passwordHashSaltRounds,
   createUser,
   getUserByEmail,
   getUserByResetPasswordToken,
   getUserByVerificationToken,
-} from '../services/user.service.ts';
+} from '../services/user.service';
 import {
   emailResetPasswordLink,
   emailVerificationLink,
-} from '../services/mail.service.ts';
-import ApiError from '../util/apiError.ts';
+} from '../services/mail.service';
+import ApiError from '../util/apiError';
 import {
   getInviteByToken,
   removeInviteByToken,
-} from '../services/invite.service.ts';
-import { IInvite } from '../models/invite.model.ts';
+} from '../services/invite.service';
+import { IInvite } from '../models/invite.model';
 
 /**
  * A controller function to login a user and create a session with Passport.

@@ -4,7 +4,7 @@ import { compare } from 'bcrypt';
 import {
   getUserByEmailWithPassword,
   getUserById,
-} from '../services/user.service.ts';
+} from '../services/user.service';
 
 interface IUserWithPassword {
   _id: string;
