@@ -3,7 +3,7 @@ yarn-error.log
 /bin
 .env
 /.env
-
+.github
 .env.local
 .env.development.local
 .env.test.local
