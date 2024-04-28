@@ -7,7 +7,7 @@ COPY ./package.json /package.json
 COPY ./public /public
 COPY ./src /src
 RUN yarn config set network-timeout 600000 -g
-RUN yarn install
+RUN yarn setup
 RUN (yarn start &); sleep 10s; kill $(pgrep -f "yarn start")
 EXPOSE 3000
 CMD ["yarn","client"]
